@@ -37,6 +37,7 @@ class Graph {
     }
     void addEdge(int u, int v, int w)   {
         adj.add(new Edge(u, v, w));
+        adj.add(new Edge(v, u, w));
     }
 }
 
