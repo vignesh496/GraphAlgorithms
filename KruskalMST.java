@@ -13,9 +13,13 @@ class KruskalMST {
         graph.addEdge(3, 4, 8);
         graph.addEdge(1, 3, 10); // Additional edge to make it disconnected
 
-        for (Edge e : Kruskal.findMST(graph))    {
-                System.out.println(e.u + " "+ e.v + " "+e.w);  
+        int cost = 0; 
+        System.out.println("u\tv\tw");  
+        for (Edge e : Kruskal.findMST(graph)) {
+            System.out.println(e.u + "\t" + e.v + "\t" + e.w);  
+            cost += e.w;
         }
+        System.out.println("Minimum cost of edges : " + cost);
     }
 }
 
@@ -37,6 +41,7 @@ class Graph {
     }
     void addEdge(int u, int v, int w)   {
         adj.add(new Edge(u, v, w));
+        adj.add(new Edge(v, u, w));
     }
 }
 
