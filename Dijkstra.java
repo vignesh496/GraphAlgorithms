@@ -15,9 +15,10 @@ class Dijkstra {
         graph.addEdge(2, 4, 7);
         graph.addEdge(3, 4, 8);
 
-        int[] dist = shortestPath(graph, 1);
+        int[] dist = shortestPath(graph, 2);
+        System.out.println("Vertices\tDistance");
         for (int i = 0; i < dist.length; i++)  {
-            System.out.println(i + " -> " + dist[i]);
+            System.out.println(i + "\t " + dist[i]);
         }
         System.out.println("\nIntermediary paths\nu --- v\t\tw");
         for (Edge e : paths)    {
@@ -32,26 +33,31 @@ class Dijkstra {
         dist[s] = 0;
         PriorityQueue<Edge> pq = new PriorityQueue<>(Comparator.comparingInt(e -> e.w));
         pq.offer(new Edge(s, s, 0));
-
+    
         paths = new ArrayList<>();
         while (!pq.isEmpty()) {
             Edge min = pq.poll();
             int u = min.v;
-
+    
             if (visited[u]) 
                 continue;
                 
             visited[u] = true;
-
+    
             for (Edge e : graph.adj) {
                 if (e.u == u && dist[e.v] > dist[u] + e.w) {
                     dist[e.v] = dist[u] + e.w;
                     pq.offer(new Edge(u, e.v, dist[e.v]));
                     paths.add(e);
+                    for (Edge x : paths)    {
+                        if (x.v == e.v && x.w > e.w)    {
+                            paths.remove(x);
+                            break;
+                        }
+                    }
                 }
             }
         }
-
         return dist;
     }
 }
