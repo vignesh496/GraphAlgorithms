@@ -40,7 +40,7 @@ class Graph {
 }
 
 class BellmanFord  {
-        static void shortestPath(Graph graph, int s) {
+    static void shortestPath(Graph graph, int s) {
         int[] dist = new int[graph.V];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[s] = 0;
